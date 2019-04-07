@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 namespace UndiContacts
 {
@@ -14,30 +11,21 @@ namespace UndiContacts
 			public string key;
 			public string name;
 			public string phone;
+			public string lastTime;
 			public string comment;
 
-			public ContactImport( string key, string name, string phone, string comment )
+			public ContactImport( string key, string name, string phone, string lastTime, string comment )
 			{
 				this.key = key;
 				this.name = name;
 				this.phone = phone;
+				this.lastTime = lastTime;
 				this.comment = comment;
 			}
 		}
 
 
 		static readonly public string folder = "Contacts";
-
-		public static ContactImport[] ImportData()
-		{
-			// Read the file in Resources
-			var raw = Resources.Load( folder ) as TextAsset;
-			var json = raw.ToString();
-
-			// Convert to our data structure
-			ContactImport[] data = JsonTools.FromJson<ContactImport>( json );
-			return data;
-		}
 
 
 		public static ContactImport[] GetContactsData()

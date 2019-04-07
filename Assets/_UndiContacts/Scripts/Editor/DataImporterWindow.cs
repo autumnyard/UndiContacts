@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 using System;
 
@@ -28,11 +26,16 @@ namespace UndiContacts
 			EditorGUILayout.TextField( googleId );
 			if( GUILayout.Button( "Download" ) )
 			{
-				GetConverter();
-				DownloadData();
-				CleanConverter();
-				SaveDataOnAssets();
+				Download();
 			}
+		}
+
+		public void Download()
+		{
+			GetConverter();
+			DownloadData();
+			CleanConverter();
+			SaveDataOnAssets();
 		}
 
 
@@ -85,10 +88,10 @@ namespace UndiContacts
 					Debug.Log( $"We have {item.key} asset. Update." );
 					var contact = go as Contact;
 
-					int phone = Int32.Parse(item.phone);
+					int phone = Int32.Parse( item.phone );
 					//int.TryParse( item.phone, out phone );
-					
-					contact.Set( item.key, item.name, phone, item.comment );
+
+					contact.Set( item.key, item.name, phone, item.lastTime, item.comment );
 				}
 				else
 				{
@@ -96,11 +99,11 @@ namespace UndiContacts
 					Contact asset = ScriptableObject.CreateInstance<Contact>();
 					AssetDatabase.CreateAsset( asset, $"Assets/Resources/Data/{item.key}.asset" );
 					AssetDatabase.SaveAssets();
-					
+
 					//int phone = 0;
 					//int.TryParse( item.phone, out phone );
-					int phone = Int32.Parse(item.phone);
-					asset.Set( item.key, item.name, phone, item.comment );
+					int phone = Int32.Parse( item.phone );
+					asset.Set( item.key, item.name, phone, item.lastTime, item.comment );
 				}
 			}
 		}

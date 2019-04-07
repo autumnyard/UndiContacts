@@ -290,7 +290,15 @@ namespace UndiContacts
 						case "string_":
 						case "string":
 							{
-								data.Add( propertyNames[columnId], strVal );
+								//if( string.IsNullOrEmpty( strVal ) )
+								//{
+								//	Debug.Log( "---------" );
+								//	data.Add( propertyNames[columnId], "asifhjsaihdf" );
+								//}
+								//else
+								{
+									data.Add( propertyNames[columnId], strVal );
+								}
 								break;
 							}
 						case "int":
